@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
                                              //Entity or Table Name, DataType of PK
 public interface CategoryRepository extends JpaRepository<Category, Integer>{
 
+    boolean existsByName(String name); //check category
+
 }
