@@ -1,4 +1,9 @@
 package co.istad.sokkeang.ecommerce.service.Impl;
 
-public class ProductServiceImpl {
+import co.istad.sokkeang.ecommerce.service.ProductService;
+
+public class ProductServiceImpl implements ProductService {
+
+
+
 }

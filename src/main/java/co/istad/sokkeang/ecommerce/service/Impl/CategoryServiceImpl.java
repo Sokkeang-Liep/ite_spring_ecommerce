@@ -1,18 +1,21 @@
 package co.istad.sokkeang.ecommerce.service.Impl;
 
 import co.istad.sokkeang.ecommerce.domain.Category;
+import co.istad.sokkeang.ecommerce.domain.Product;
 import co.istad.sokkeang.ecommerce.dto.CategoryResponse;
 import co.istad.sokkeang.ecommerce.dto.CreateCategoryRequest;
+import co.istad.sokkeang.ecommerce.dto.RequestDto;
 import co.istad.sokkeang.ecommerce.dto.UpdateCategoryRequest;
 import co.istad.sokkeang.ecommerce.repository.CategoryRepository;
-import co.istad.sokkeang.ecommerce.repository.ProductRepository;
 import co.istad.sokkeang.ecommerce.service.CategoryService;
 import co.istad.sokkeang.ecommerce.mapper.CategoryMapper;
+import co.istad.sokkeang.ecommerce.specification.FilterSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -27,6 +30,8 @@ public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryRepository categoryRepository;
     private final CategoryMapper categoryMapper;
+    private final FilterSpecification<Category> categoryFilterSpecification;
+
 
 
 
@@ -160,4 +165,20 @@ public class CategoryServiceImpl implements CategoryService {
 //                .build();
     }
 
+    //specification
+    @Override
+    public Page<CategoryResponse> findByCriteria(RequestDto requestDto, Pageable pageable) {
+        Specification<Category> searchSpecification = categoryFilterSpecification
+                .getSearchSpecification(requestDto.getSearchRequestDto(),
+                        requestDto.getGlobalOperator());
+        return categoryRepository
+                .findAll(searchSpecification, pageable)
+                .map(categoryMapper::mapCategoryToCategoryResponse);
+
+    }
+
+
+
 }
+
+

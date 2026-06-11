@@ -2,13 +2,17 @@ package co.istad.sokkeang.ecommerce.controller;
 
 import co.istad.sokkeang.ecommerce.dto.CategoryResponse;
 import co.istad.sokkeang.ecommerce.dto.CreateCategoryRequest;
+import co.istad.sokkeang.ecommerce.dto.RequestDto;
 import co.istad.sokkeang.ecommerce.dto.UpdateCategoryRequest;
 import co.istad.sokkeang.ecommerce.service.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -70,6 +74,17 @@ public class CategoryController {
     public CategoryResponse updateCategoryById(@PathVariable Integer id, @RequestBody UpdateCategoryRequest updateCategoryRequest){
         return  categoryService.updateCategoryById(id,updateCategoryRequest);
     }
+
+    //specification
+    @PostMapping("/search")
+    public ResponseEntity<Page<CategoryResponse>> searchCategories(
+            @RequestBody RequestDto requestDto,
+            @PageableDefault(size = 10) Pageable pageable
+    ){
+        Page<CategoryResponse> responsePage = categoryService.findByCriteria(requestDto, pageable);
+        return ResponseEntity.ok(responsePage);
+    }
+
 
 
 

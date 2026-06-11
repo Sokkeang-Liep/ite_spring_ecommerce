@@ -19,7 +19,9 @@ public interface CategoryMapper {
     Category mapCreateCategoryRequestToCategory(CreateCategoryRequest createCategoryRequest);
 
     @Mapping(source = "parentCategory.id", target = "parentId")
+
     CategoryResponse mapCategoryToCategoryResponse(Category category);
+
 
 
 
