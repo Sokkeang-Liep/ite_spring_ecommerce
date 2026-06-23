@@ -5,8 +5,6 @@ import co.istad.sokkeang.ecommerce.dto.SearchRequestDto;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
-
-
 import java.util.ArrayList;
 import java.util.List;
 
