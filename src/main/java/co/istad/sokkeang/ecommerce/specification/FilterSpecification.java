@@ -1,7 +1,7 @@
 package co.istad.sokkeang.ecommerce.specification;
 
-import co.istad.sokkeang.ecommerce.dto.RequestDto;
-import co.istad.sokkeang.ecommerce.dto.SearchRequestDto;
+import co.istad.sokkeang.ecommerce.features.category.dto.RequestDto;
+import co.istad.sokkeang.ecommerce.features.category.dto.SearchRequestDto;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;

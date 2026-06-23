@@ -1,3 +1,6 @@
+file:
+  client-path: /file
+  storage-location: C:\Users\liep sokkeang\Desktop\Spring_ITE\ite-file
 spring:
   jpa:
     hibernate:
