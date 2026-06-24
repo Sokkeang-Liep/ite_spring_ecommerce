@@ -55,6 +55,7 @@ public class FileUploadServiceImpl implements FileUploadService{
                 .build();
     }
 
+    //Handle Multiple files upload
     @Override
     public List<FileUploadResponse> upload(List<MultipartFile> files) {
 
@@ -64,8 +65,8 @@ public class FileUploadServiceImpl implements FileUploadService{
 
             String name = UUID.randomUUID().toString();
 
-            String ext = file.getOriginalFilename()
-                    .substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+            String originalFilename = file.getOriginalFilename(); String ext = originalFilename
+                    .substring(originalFilename.lastIndexOf(".") + 1);
 
             name += "." + ext;
 
@@ -93,6 +94,7 @@ public class FileUploadServiceImpl implements FileUploadService{
         return responses;
     }
 
+    //Handle Delete files upload
     @Override
     public void deleteByName(String name) {
         Path path = Paths.get(storageLocation + name);
