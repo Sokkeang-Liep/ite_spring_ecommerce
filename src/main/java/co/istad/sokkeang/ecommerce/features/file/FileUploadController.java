@@ -2,6 +2,7 @@ package co.istad.sokkeang.ecommerce.features.file;
 
 import co.istad.sokkeang.ecommerce.features.file.dto.FileUploadResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +27,7 @@ public class FileUploadController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/multiple")
     public List<FileUploadResponse> uploadMultiple(@RequestPart List<MultipartFile> files){
-        return fileUploadService.upload(files);
+        return fileUploadService.uploadMultipart(files);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -34,6 +35,22 @@ public class FileUploadController {
     public void deleteByName(@PathVariable String name){
         fileUploadService.deleteByName(name);
     }
+
+    @GetMapping("/{name}")
+    public FileUploadResponse findByName(@PathVariable String name) {
+        return fileUploadService.findByName(name);
+    }
+
+    @GetMapping
+    public Page<FileUploadResponse> findAll(
+            @RequestParam(required = false, defaultValue = "0") int pageNumber,
+            @RequestParam(required = false, defaultValue = "25") int pageSize
+    ) {
+        return fileUploadService.findAll(pageNumber, pageSize);
+    }
+
+
+
 
 
 }
