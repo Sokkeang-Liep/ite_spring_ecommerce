@@ -2,6 +2,7 @@ package co.istad.sokkeang.ecommerce.features.product;
 
 import co.istad.sokkeang.ecommerce.features.category.Category;
 import co.istad.sokkeang.ecommerce.features.order.Order;
+import co.istad.sokkeang.ecommerce.features.order.OrderLine;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,7 +53,7 @@ public class Product {
     private Category category;
 
     @OneToMany(mappedBy = "product")
-    private List<Order.OrderLine> orderLine;
+    private List<OrderLine> orderLines;
 }
 
 

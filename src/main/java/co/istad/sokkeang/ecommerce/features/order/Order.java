@@ -34,7 +34,7 @@ public class Order {
     private String remark;
 
     @Column(nullable = false)
-    private Boolean status;
+    private Boolean status;  //PAYMENT
 
     @Column(nullable = false)
     private LocalDateTime orderedAt;
@@ -43,31 +43,10 @@ public class Order {
     private Boolean isDeleted;
 
     //bidirectional (with order_line)
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderLine> orderLines;
 
-    @Setter
-    @Getter
-    @NoArgsConstructor
-    @Entity
-    @Table(name = "order_lines")
 
-    public static class OrderLine {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Integer id;
 
-        @ManyToOne
-        private Order order;
-
-        @ManyToOne
-        private Product product;
-
-        @Column(nullable = false)
-        private Integer qty;
-
-        @Column(nullable = false)
-        private BigDecimal unitPrice;
-
-    }
 }
+
